@@ -34,7 +34,8 @@ flask_assignment/
 ### Prerequisites
 
 - Python 3.8+
-- RabbitMQ Server ([Installation Guide](https://www.rabbitmq.com/download.html))
+- RabbitMQ Server ([Installation Guide](https://www.rabbitmq.com/download.html))(Optional)
+- Docker Desktop (Recommended)
 - `pip` for installing Python packages
 
 ### Installation
@@ -47,8 +48,19 @@ flask_assignment/
    ```bash
    pip install -r requirements.txt
 
-3. Ensure RabbitMQ server is running locally (default settings: localhost:5672)
-4. Initialize the database (auto happens on first run, or explicitly run):
+3. If you don’t have RabbitMQ installed locally, you can run it easily with Docker:
+   ```bash
+   docker run -d --hostname rabbit --name rabbitmq \
+   -p 5672:5672 -p 15672:15672 \
+   rabbitmq:3-management
+
+4. Access RabbitMQ UI:
+   Open: http://localhost:15672
+   Login:
+   Username: guest
+   Password: guest
+
+6. Initialize the database (auto happens on first run, or explicitly run):
    ``` bash
    python app.py
 
@@ -62,7 +74,7 @@ flask_assignment/
    ```bash
    python -m worker.consumer
 
-## API Endpoints
+## API Endpoints (Testing with 'Postman')
 
 ### SEND Notification
 

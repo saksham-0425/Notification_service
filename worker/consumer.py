@@ -4,11 +4,11 @@ import pika
 import json
 import time
 from models import db, Notification
-from app import app  # Ensure app is imported to initialize db
+from app import app  
 
 def process_notification(data):
     fail_times=2
-    with app.app_context():  # Ensure DB operations have Flask context
+    with app.app_context():  
         notif = Notification.query.get(data['notification_id'])
         if not notif:
             print(f"❌ Notification ID {data['notification_id']} not found.")
@@ -21,7 +21,7 @@ def process_notification(data):
                 print(f"📨 Sending {notif.type} to user {notif.user_id}: {notif.message}")
                 if(retries<fail_times):
                     raise Exception("Simulated failure for testing retries")
-                time.sleep(1)  # Simulate sending delay
+                time.sleep(1)  
                 notif.status = 'sent'
                 db.session.commit()
                 print(f"✅ Notification {notif.id} sent successfully.")

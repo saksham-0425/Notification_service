@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="POST_postman.jpg" alt="POST request" width="300" height="180"/>
+  <img src="GET_postman.jpg" alt="GET request" width="300" height="180"/>
+  <img src="TERMINAL_integrated.jpg" alt="Terminal" width="300" height="180"/>
+</p>
+
+
 # Flask Notification Service with RabbitMQ
 
 A simple Flask-based notification service that supports sending notifications via Email, SMS, and In-App messages. Notifications are queued using RabbitMQ and processed asynchronously by a worker (consumer.py).

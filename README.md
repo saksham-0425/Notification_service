@@ -126,6 +126,7 @@ The worker includes a retry mechanism that attempts to resend notifications up t
 ## Notes
 
 - RabbitMQ Management UI is available at http://localhost:15672 (default user/pass: guest/guest).
+  <p align='center'><img src=".jpg" alt="POST request" width="300" height="180"/></p>
 - Notifications are persisted in notifications.db SQLite file.
 - Ensure worker/consumer.py and Flask app share the same model and DB config for consistency.
 

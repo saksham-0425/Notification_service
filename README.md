@@ -2,7 +2,6 @@
 
 A simple Flask-based notification service that supports sending notifications via Email, SMS, and In-App messages. Notifications are queued using RabbitMQ and processed asynchronously by a worker (consumer.py).
 
----
 
 ## Features
 
@@ -15,22 +14,20 @@ A simple Flask-based notification service that supports sending notifications vi
 
 ## Project Structure
 
+```
 flask_assignment/
-│
-├── app.py # Flask app initialization and routes registration
-├── models.py # SQLAlchemy models (Notification)
-├── requirements.txt # Python dependencies
+├── app.py                # Flask app initialization and routes registration
+├── models.py             # SQLAlchemy models (Notification)
+├── requirements.txt      # Python dependencies
 ├── routes/
-│ └── notifications.py # Notification API endpoints (Blueprint)
+│   └── notifications.py  # Notification API endpoints (Blueprint)
 ├── worker/
-│ └── consumer.py # RabbitMQ worker that processes notifications
-├── instance/ 
-├ └── notifications.db   # SQLite database (auto-created)
+│   └── consumer.py       # RabbitMQ worker that processes notifications
+├── instance/
+│   └── notifications.db  # SQLite database (auto-created)
 └── templates/
-  └── index.html # Home page template
-
-
----
+    └── index.html        # Home page template
+```
 
 ## Getting Started
 
@@ -47,7 +44,73 @@ flask_assignment/
    git clone <https://github.com/saksham-0425/Notification_service>
 
 2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
 
-pip install -r requirements.txt
-   
+3. Ensure RabbitMQ server is running locally (default settings: localhost:5672)
+4. Initialize the database (auto happens on first run, or explicitly run):
+   ``` bash
+   python app.py
+
+### Running the app and worker
+
+1. Start the Flask app:
+   ```bash
+   python app.py
+
+2. Start the RabbitMQ worker in another terminal:
+   ```bash
+   python -m worker.consumer
+
+## API Endpoints
+
+### SEND Notification
+
+-  URL: /notifications
+-  Method: POST
+-  Body (JSON):
+   ```json
+   {
+    "user_id": "1",
+    "type": "email",
+    "message": "Hello, this is a test notification"
+   }
+-  Response: 202 Accepted when notification is queued
+  
+### GET Notification
+
+-  URL: /users/<user_id>/notifications
+-  Method: GET
+-  Response :
+   ```json
+   [
+   {
+    "id": 1,
+    "type": "email",
+    "message": "Hello, this is a test notification",
+    "status": "sent"
+   },
+   ...
+   ]
+
+## Testing Retry Logic
+
+The worker includes a retry mechanism that attempts to resend notifications up to 3 times if processing fails. To test this, you can simulate failure in the worker code by temporarily forcing an exception.
+
+## Dependencies
+
+- Flask
+- Flask-SQLAlchemy
+- pika (RabbitMQ client)
+- SQLite3 (builtin with Python)
+
+## Notes
+
+- RabbitMQ Management UI is available at http://localhost:15672 (default user/pass: guest/guest).
+- Notifications are persisted in notifications.db SQLite file.
+- Ensure worker/consumer.py and Flask app share the same model and DB config for consistency.
+
+# Licence
+MIT
+
 

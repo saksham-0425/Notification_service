@@ -3,7 +3,7 @@ from models import db, Notification
 import pika
 import json
 
-# ✅ Correctly create a Blueprint object
+
 notifications_bp = Blueprint('notifications', __name__)
 
 def publish_to_queue(notification_data):
@@ -30,7 +30,6 @@ def send_notification():
     if notif_type not in ['email', 'sms', 'inapp']:
         return jsonify({'error': 'Invalid notification type'}), 400
     
-    # ✅ Correct assignment (use '=' not '-')
     notification = Notification(user_id=user_id, type=notif_type, message=message, status='pending')
     db.session.add(notification)
     db.session.commit()
@@ -46,7 +45,6 @@ def send_notification():
 
 @notifications_bp.route('/users/<user_id>/notifications', methods=['GET'])
 def get_user_notifications(user_id):
-    # ✅ Correct model name (singular: Notification)
     notifications = Notification.query.filter_by(user_id=user_id).all()
     return jsonify([
         {'id': n.id, 'type': n.type, 'message': n.message, 'status': n.status}

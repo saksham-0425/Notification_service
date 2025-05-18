@@ -1,7 +1,7 @@
 <p align="center">
   <img src="POST_postman.jpg" alt="POST request" width="300" height="180"/>
   <img src="GET_postman.jpg" alt="GET request" width="300" height="180"/>
-  <img src="TERMINAL_integrated.jpg" alt="Terminal" width="300" height="140"/>
+  <img src="Screenshot 2025-05-19 002430.png" alt="Terminal" width="300" height="100"/>
 </p>
 
 

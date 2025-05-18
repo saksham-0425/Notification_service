@@ -45,5 +45,9 @@ flask_assignment/
 1. Clone the repo:
    ```bash
    git clone <https://github.com/saksham-0425/Notification_service>
-   cd flask_assignment
+
+2. Install dependencies:
+
+pip install -r requirements.txt
+   
 
